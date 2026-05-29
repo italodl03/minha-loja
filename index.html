@@ -1,254 +1,279 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de QR Code PIX - Rápido e Grátis</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #0b3b2f 0%, #05221a 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .card {
-            background: #1e1e1e;
-            padding: 2rem;
-            border-radius: 1.5rem;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.5);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        h2 {
-            color: #00e5b6;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            font-size: 1.8rem;
-        }
-        .info {
-            background: #2d2d2d;
-            padding: 0.75rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            font-size: 0.8rem;
-            text-align: center;
-            color: #b0b0b0;
-            word-break: break-all;
-        }
-        .info span {
-            color: #00e5b6;
-            font-weight: bold;
-        }
-        .input-group {
-            margin-bottom: 1rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            color: #ccc;
-            font-weight: 500;
-        }
-        input {
-            width: 100%;
-            padding: 14px;
-            background: #2c2c2c;
-            border: 1px solid #3a3a3a;
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.2s;
-        }
-        input:focus {
-            border-color: #00e5b6;
-            box-shadow: 0 0 0 2px rgba(0,229,182,0.2);
-        }
-        button {
-            width: 100%;
-            padding: 14px;
-            background: #00e5b6;
-            border: none;
-            border-radius: 12px;
-            color: #1a1a1a;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.2s;
-        }
-        button:hover {
-            background: #00c29b;
-            transform: scale(1.01);
-        }
-        button:active {
-            transform: scale(0.99);
-        }
-        .qrcode-container {
-            margin-top: 2rem;
-            text-align: center;
-            background: #2a2a2a;
-            padding: 1.5rem;
-            border-radius: 1rem;
-        }
-        #qrcode {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 220px;
-        }
-        #qrcode canvas,
-        #qrcode img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        .copy-area {
-            margin-top: 1rem;
-            display: flex;
-            gap: 0.5rem;
-        }
-        #payload-output {
-            background: #2c2c2c;
-            border: 1px solid #3a3a3a;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 0.7rem;
-            color: #eee;
-            word-break: break-all;
-            flex: 1;
-            font-family: monospace;
-        }
-        .copy-btn {
-            background: #3a3a3a;
-            padding: 0 15px;
-            border-radius: 8px;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .copy-btn:hover {
-            background: #4a4a4a;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.7rem;
-            color: #6c6c6c;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gerador PIX - Sem API Externa</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(145deg, #0a2f2a 0%, #041e19 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.container {
+    background: #1e1e1e;
+    border-radius: 28px;
+    padding: 1.8rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+}
+h1 {
+    color: #00e676;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+.chave {
+    background: #2a2a2a;
+    padding: 10px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #ccc;
+    word-break: break-all;
+}
+.chave span {
+    color: #00e676;
+    font-weight: bold;
+}
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #ddd;
+}
+input {
+    width: 100%;
+    padding: 14px;
+    background: #2c2c2c;
+    border: 1px solid #3a3a3a;
+    border-radius: 14px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+input:focus {
+    border-color: #00e676;
+}
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: #00e676;
+    border: none;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: 0.2s;
+}
+button:hover {
+    background: #00c853;
+    transform: scale(0.98);
+}
+.qr-box {
+    margin-top: 25px;
+    background: #2a2a2a;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+}
+#qrcode {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+#payload {
+    width: 100%;
+    background: #1e1e1e;
+    border: 1px solid #3a3a3a;
+    color: #eee;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-family: monospace;
+    word-break: break-all;
+    resize: none;
+}
+.copy-btn {
+    margin-top: 10px;
+    background: #3a3a3a;
+    color: white;
+    padding: 8px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.copy-btn:hover {
+    background: #555;
+}
+</style>
 </head>
 <body>
-    <div class="card">
-        <h2>⚡ PIX Fácil</h2>
-        <div class="info">
-            🔑 Chave fixa: <span>11250303303</span>
-        </div>
-
-        <div class="input-group">
-            <label>💰 Valor (R$)</label>
-            <input type="number" id="valor" placeholder="Ex: 49.90" step="0.01" min="0.01">
-        </div>
-
-        <button onclick="gerarPix()">✨ Gerar QR Code PIX ✨</button>
-
-        <div class="qrcode-container">
-            <div id="qrcode"></div>
-            <div class="copy-area">
-                <input type="text" id="payload-output" readonly placeholder="Código Pix Copia e Cola aparecerá aqui...">
-                <button class="copy-btn" onclick="copiarPayload()">Copiar</button>
-            </div>
-        </div>
-        <div class="footer">
-            ✅ Geração 100% local e segura • Código compatível com qualquer banco
-        </div>
+<div class="container">
+    <h1>⚡ PIX Local</h1>
+    <div class="chave">
+        🔑 Chave: <span>11250303303</span>
     </div>
+    <label>💰 Valor (R$)</label>
+    <input type="number" id="valor" step="0.01" placeholder="Ex: 49.90">
+    <button onclick="gerarPix()">Gerar QR Code PIX</button>
+    <div class="qr-box">
+        <div id="qrcode"></div>
+        <textarea id="payload" rows="3" readonly placeholder="Código Pix copia e cola aparecerá aqui..."></textarea>
+        <div class="copy-btn" onclick="copiarPayload()">📋 Copiar código Pix</div>
+    </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/pix-generator-code@1.1.1/dist/pix-generator-code.umd.js"></script>
-    <script>
-        // Função principal para gerar o QR Code
-        async function gerarPix() {
-            const valorInput = document.getElementById('valor');
-            let valor = valorInput.value.trim();
-
-            // Validação do valor
-            if (valor === "") {
-                alert("🔔 Por favor, digite um valor!");
-                return;
-            }
-            let numero = parseFloat(valor.replace(',', '.'));
-            if (isNaN(numero) || numero <= 0) {
-                alert("⚠️ Valor inválido. Digite um número maior que zero.");
-                return;
-            }
-
-            // Dados do recebedor (substitua pelos seus dados)
-            const pixKey = "11250303303";           // Sua chave Pix
-            const merchantName = "Seu Negócio";      // Nome que aparecerá no app do banco
-            const merchantCity = "Brasilia";         // Sua cidade
-            const description = "Pagamento via Pix"; // Descrição opcional
-            const txid = "PAG" + Date.now();         // ID único para rastrear o pagamento
-
-            try {
-                // Instanciando a biblioteca PixGeneratorCode
-                const pixGenerator = new PixGeneratorCode({
-                    pixKey: pixKey,
-                    merchantName: merchantName,
-                    merchantCity: merchantCity,
-                    amount: numero,
-                    description: description,
-                    txid: txid
-                });
-
-                // Gera o payload Pix (código copia e cola)
-                const payload = pixGenerator.getPayload();
-
-                // Exibe o payload na caixa de texto
-                document.getElementById('payload-output').value = payload;
-
-                // Gera o QR Code a partir do payload
-                const qrContainer = document.getElementById("qrcode");
-                qrContainer.innerHTML = ""; // Limpa QR anterior
-
-                new QRCode(qrContainer, {
-                    text: payload,
-                    width: 220,
-                    height: 220,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.M
-                });
-
-            } catch (error) {
-                console.error("Erro ao gerar Pix:", error);
-                alert("❌ Ocorreu um erro ao gerar o código Pix. Verifique sua conexão ou tente novamente.");
+<script>
+// Função que gera o payload PIX manualmente (padrão BACEN)
+function gerarPayloadPIX(chave, nome, cidade, valor, txid, descricao) {
+    // Valores fixos do payload
+    const gui = "br.gov.bcb.pix";  // GUI do Pix
+    const categoria = "STATIC";    // Estático (ou "DYNAMIC")
+    
+    // Montagem no padrão EMV (cada campo tem ID + tamanho + valor)
+    function addField(id, value) {
+        const len = value.length;
+        const lenStr = len.toString().padStart(2, '0');
+        return id + lenStr + value;
+    }
+    
+    let payload = "";
+    
+    // ID 00: Payload Format Indicator
+    payload += addField("00", "01");
+    
+    // ID 26: GUI e informações do Pix
+    let guiField = addField("00", gui);
+    // ID 26.01: Chave Pix (telefone, cpf, email, etc)
+    let chaveField = addField("01", chave);
+    // ID 26.02: Descrição (opcional)
+    let descField = descricao ? addField("02", descricao) : "";
+    // ID 26.03: Nome do recebedor
+    let nomeField = addField("03", nome);
+    // ID 26.04: Cidade
+    let cidadeField = addField("04", cidade);
+    // ID 26.05: TXID (opcional)
+    let txidField = txid ? addField("05", txid) : "";
+    
+    let guiPayload = guiField + chaveField + descField + nomeField + cidadeField + txidField;
+    payload += addField("26", guiPayload);
+    
+    // ID 52: Merchant Category Code (sempre 0000)
+    payload += addField("52", "0000");
+    
+    // ID 53: Currency Code (986 = BRL)
+    payload += addField("53", "986");
+    
+    // ID 54: Valor (se tiver valor)
+    if (valor && valor > 0) {
+        let valorStr = valor.toFixed(2).toString();
+        payload += addField("54", valorStr);
+    }
+    
+    // ID 58: Country Code (BR)
+    payload += addField("58", "BR");
+    
+    // ID 59: Merchant Name (até 25 caracteres)
+    let nomeLimpo = nome.substring(0, 25);
+    payload += addField("59", nomeLimpo);
+    
+    // ID 60: Merchant City (até 15 caracteres)
+    let cidadeLimpa = cidade.substring(0, 15);
+    payload += addField("60", cidadeLimpa);
+    
+    // ID 62: Additional Data Field (TxId)
+    let txidVal = txid || "***";
+    let txidField62 = addField("05", txidVal);
+    payload += addField("62", txidField62);
+    
+    // ID 63: CRC16 (calculado ao final - vou deixar fixo 6304 como exemplo, mas ideal seria calcular)
+    // Para simplificar e não depender de biblioteca extra, vamos ignorar o CRC e deixar 6304 (funciona na maioria dos bancos)
+    payload += "6304";
+    
+    // Cálculo do CRC16 real (opcional, mas vamos fazer para ficar perfeito)
+    function crc16(hexString) {
+        let crc = 0xFFFF;
+        for (let i = 0; i < hexString.length; i += 2) {
+            let byte = parseInt(hexString.substr(i, 2), 16);
+            crc ^= byte;
+            for (let bit = 0; bit < 8; bit++) {
+                if ((crc & 0x0001) !== 0) {
+                    crc = (crc >> 1) ^ 0x8408;
+                } else {
+                    crc = crc >> 1;
+                }
             }
         }
+        return (~crc & 0xFFFF);
+    }
+    
+    // Remove o "6304" temporário
+    let payloadSemCRC = payload.slice(0, -4);
+    // Converte payload para hex string (cada caractere ASCII para hex)
+    let hexString = "";
+    for (let i = 0; i < payloadSemCRC.length; i++) {
+        let code = payloadSemCRC.charCodeAt(i);
+        hexString += code.toString(16).padStart(2, '0');
+    }
+    let crc = crc16(hexString);
+    let crcHex = crc.toString(16).toUpperCase().padStart(4, '0');
+    
+    return payloadSemCRC + crcHex;
+}
 
-        // Função para copiar o código Pix (copia e cola)
-        function copiarPayload() {
-            const payloadInput = document.getElementById('payload-output');
-            payloadInput.select();
-            payloadInput.setSelectionRange(0, 99999); // Para dispositivos móveis
-            navigator.clipboard.writeText(payloadInput.value);
-            alert("📋 Código Pix copiado! Cole no app do seu banco para pagar.");
-        }
-    </script>
+function gerarPix() {
+    const valorInput = document.getElementById('valor').value;
+    let valorNum = parseFloat(valorInput);
+    if (isNaN(valorNum) || valorNum <= 0) {
+        alert("Digite um valor válido (ex: 49.90)");
+        return;
+    }
+    
+    const chave = "11250303303";
+    const nome = "Seu Nome";      // Altere para seu nome ou empresa (máx 25 caracteres)
+    const cidade = "BRASILIA";    // Altere para sua cidade (máx 15 caracteres)
+    const txid = "PIX" + Date.now();
+    const descricao = "Pagamento";
+    
+    const payload = gerarPayloadPIX(chave, nome, cidade, valorNum, txid, descricao);
+    
+    // Exibe o payload no textarea
+    document.getElementById('payload').value = payload;
+    
+    // Gera o QR Code
+    const qrDiv = document.getElementById('qrcode');
+    qrDiv.innerHTML = "";
+    new QRCode(qrDiv, {
+        text: payload,
+        width: 220,
+        height: 220,
+        colorDark: "#000000",
+        colorLight: "#ffffff"
+    });
+}
+
+function copiarPayload() {
+    const payloadText = document.getElementById('payload');
+    payloadText.select();
+    document.execCommand('copy');
+    alert("✅ Código Pix copiado! Cole no app do banco.");
+}
+</script>
 </body>
 </html>
