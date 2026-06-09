@@ -1,39 +1,18 @@
 fetch("produtos.json")
 .then(res => res.json())
 .then(produtos => {
-
-  const area = document.getElementById("produtos");
-
+  let html = "";
   produtos.forEach(produto => {
-
-    area.innerHTML += `
+    html += `
     
-      <div class="produto">
-
+      <div style="background:#222;padding:20px;margin:20px;">
         <a href="${produto.link}" target="_blank">
-          <img src="${produto.imagem}">
+          <img src="${produto.imagem}" width="200">
         </a>
-
         <h2>${produto.nome}</h2>
-
         <p>${produto.preco}</p>
-
-        <a href="${produto.link}" target="_blank">
-          <button>Comprar</button>
-        </a>
-
       </div>
-
     `;
-
   });
-
-})
-.catch(erro => {
-
-  document.getElementById("produtos").innerHTML =
-  "<h2>Erro ao carregar produtos 😭</h2>";
-
-  console.log(erro);
-
+  document.getElementById("produtos").innerHTML = html;
 });
