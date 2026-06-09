@@ -1,13 +1,8 @@
 [
   {
-    "nome": "Mouse Gamer",
-    "preco": "R$ 99",
-    "imagem": "https://via.placeholder.com/300"
-  },
-
-  {
-    "nome": "Teclado Mecânico",
-    "preco": "R$ 199",
-    "imagem": "https://via.placeholder.com/300"
+    "nome": "Produto AliExpress",
+    "preco": "R$ 00,00",
+    "imagem": "https://ae01.alicdn.com/kf/Sddcba6114446472c9660ab6781ac686dp.jpg",
+    "link": "https://s.click.aliexpress.com/e/_c4CG9ucN"
   }
 ]
