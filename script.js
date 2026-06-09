@@ -1,31 +1,31 @@
 fetch("produtos.json")
-  .then(res => res.json())
-  .then(produtos => {
+.then(res => res.json())
+.then(produtos => {
 
-    const area = document.getElementById("produtos");
+  const area = document.getElementById("produtos");
 
-    produtos.forEach(produto => {
+  produtos.forEach(produto => {
 
-      area.innerHTML += `
+    area.innerHTML += `
+    
+    <div class="produto">
 
-      <div class="produto">
+      <a href="${produto.link}" target="_blank">
+        <img src="${produto.imagem}">
+      </a>
 
-        <a href="${produto.link}" target="_blank">
-          <img src="${produto.imagem}" width="200">
-        </a>
+      <h2>${produto.nome}</h2>
 
-        <h2>${produto.nome}</h2>
+      <p>${produto.preco}</p>
 
-        <p>${produto.preco}</p>
+      <a href="${produto.link}" target="_blank">
+        <button>Comprar</button>
+      </a>
 
-        <a href="${produto.link}" target="_blank">
-          <button>Comprar</button>
-        </a>
+    </div>
 
-      </div>
-
-      `;
-
-    });
+    `;
 
   });
+
+});
