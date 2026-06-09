@@ -7,12 +7,21 @@ fetch("produtos.json")
     produtos.forEach(produto => {
 
       area.innerHTML += `
-      
+
       <div class="produto">
-        <img src="${produto.imagem}">
+
+        <a href="${produto.link}" target="_blank">
+          <img src="${produto.imagem}" width="200">
+        </a>
+
         <h2>${produto.nome}</h2>
+
         <p>${produto.preco}</p>
-        <button>Comprar</button>
+
+        <a href="${produto.link}" target="_blank">
+          <button>Comprar</button>
+        </a>
+
       </div>
 
       `;
