@@ -8,24 +8,32 @@ fetch("produtos.json")
 
     area.innerHTML += `
     
-    <div class="produto">
+      <div class="produto">
 
-      <a href="${produto.link}" target="_blank">
-        <img src="${produto.imagem}">
-      </a>
+        <a href="${produto.link}" target="_blank">
+          <img src="${produto.imagem}">
+        </a>
 
-      <h2>${produto.nome}</h2>
+        <h2>${produto.nome}</h2>
 
-      <p>${produto.preco}</p>
+        <p>${produto.preco}</p>
 
-      <a href="${produto.link}" target="_blank">
-        <button>Comprar</button>
-      </a>
+        <a href="${produto.link}" target="_blank">
+          <button>Comprar</button>
+        </a>
 
-    </div>
+      </div>
 
     `;
 
   });
+
+})
+.catch(erro => {
+
+  document.getElementById("produtos").innerHTML =
+  "<h2>Erro ao carregar produtos 😭</h2>";
+
+  console.log(erro);
 
 });
